@@ -17,9 +17,41 @@ h1, h2, h3, h4, h5, h6{ font-weight: normal; }
 p img { float: left; margin: 0 10px 5px 0; padding: 0; }
 img { border: 0; max-width: 100%; }
 
+#pages{
+    position:relative;
+}
+
+#pages > div {
+    display: none;
+    position: absolute;
+    top:0;left:0;
+    width:100%;
+}
+
+#pages > div.current {
+    display: block;
+}
+
+#pages div.in, #pages div.out {
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-duration: 400ms;
+}
+
+@-webkit-keyframes fade-in {
+    from { opacity: 0; } to { opacity: 1; }
+}
+
+.fade.in {
+    -webkit-animation-name: fade-in;
+    z-index: 5;
+}
+.fade.out {
+    z-index: 0;
+}
+
 /*  Main Styles */
 body{
-    background: #222;
+    background: #FFF;
 }
 header{
     top:0; left:0;
@@ -60,4 +92,24 @@ h1{
     z-index:1;
     width:100%;
     padding:0;
+}
+
+#tab-bar{
+    margin:0;
+    padding:0;
+}
+#tab-bar li {
+    display: inline;
+    float:left;
+    width: 33.333%;
+}
+#tab-bar a {
+    color: #cdcdcd;
+    display: block;
+    font-weight: bold;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    -webkit-touch-callout:none;
 }

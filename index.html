@@ -6,8 +6,6 @@
     <title>Car Buddy Messenger</title>
 
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/iscroll-lite.js"></script>
-    <script src="js/app.js"></script>
 </head>
 <body>
     <header>
@@ -15,21 +13,34 @@
     </header>
     <div id="wrapper">
         <div id="main-content">
-
+            <div id="pages">
+                <div id="message-center" class="current">
+                    This is the Messages Page
+                </div>
+                <div id="parking">
+                    This is the Parking Page
+                </div>
+                <div id="fuel-tracker">
+                    This is the Fuel Tracker Page
+                </div>
+            </div>
         </div>
     </div>
     <footer>
         <ul id="tab-bar">
             <li>
-                <a href="#">Map</a>
+                <a href="#message-center">Messages</a>
             </li>
             <li>
-                <a href="#">Camera</a>
+                <a href="#parking">Parking</a>
             </li>
             <li>
-                <a href="#">Twitter</a>
+                <a href="#fuel-tracker">Fuel Tracker</a>
             </li>
         </ul>
     </footer>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="js/iscroll-lite.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>

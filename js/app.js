@@ -1,3 +1,15 @@
+App = Ember.Application.create();
+
+App.Router.map(function() {
+    // put your routes here
+});
+
+App.IndexRoute = Ember.Route.extend({
+    model: function() {
+        return ['red', 'yellow', 'blue'];
+    }
+});
+
 $('#tab-bar a').on('click', function(e){
     e.preventDefault();
     var nextPage = $(e.target.hash);

@@ -1,43 +1,66 @@
-App = Ember.Application.create();
-
-App.Router.map(function() {
-    // put your routes here
-});
-
-App.IndexRoute = Ember.Route.extend({
-    model: function() {
-        return ['red', 'yellow', 'blue'];
+/**************************
+ * Application
+ **************************/
+App = Ember.Application.create({
+    username: 'will',
+    password: '1234',
+    ready: function(){
+        checkLogin();
     }
 });
 
-$('#tab-bar a').on('click', function(e){
-    e.preventDefault();
-    var nextPage = $(e.target.hash);
-    var nextLink = $('#tab-bar a[href=' + e.target.hash + ']');
-    page(nextPage, nextLink);
-    $("#pages .current").removeClass("current");
-    nextPage.addClass("current");
+/**************************
+ * Models
+ **************************/
+App.Users = Ember.Object.extend({
+    username: null,
+    password: null
 });
 
-function page(toPage, toLink) {
-    var toPage = $(toPage),
-        fromPage = $("#pages .current");
-    var toLink = $(toLink),
-        fromLink = $("#tab-bar .current");
-    if(toPage.hasClass("current") || toPage === fromPage) {
-        return;
-    };
-    toPage.addClass("current fade in").one("webkitAnimationEnd", function(){
-        fromPage.removeClass("current fade out");
-        toPage.removeClass("fade in")
-    });
-    fromLink.removeClass("current");
-    toLink.addClass("current");
-    fromPage.addClass("fade out");
-}
+App.MessagesIn = Ember.Object.extend({
+    message_subject: null,
+    message: null
+});
+
+App.MessagesOut = Ember.Object.extend({
+    message_subject: null,
+    message: null,
+    sent: 0,
+    read: 0
+});
+
+/**************************
+ * Views
+ **************************/
+App.LoginUsername = Ember.TextField.extend({
+    placeholder: 'Enter your username',
+});
+
+App.LoginPassword = Ember.TextField.extend({
+    placeholder: 'Enter your password'
+});
+
+/**************************
+ * Controllers
+ **************************/
+App.inboxController = Ember.ArrayController.create({
+    content: [],
+    init: function(){
+        // create an instance of the Song model
+        var message = App.MessagesIn.create({
+            message_subject: 'Example Message',
+            message: 'This is the content of the message.'
+        });
+        this.pushObject(message);
+    }
+});
 
 var theScroll;
 function scroll(){
     theScroll = new iScroll('wrapper');
 }
 document.addEventListener('DOMContentLoaded', scroll, false);
+
+function checkLogin() {
+    // alert('Logged in and Ready');
+}

@@ -9,56 +9,75 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <script type="text/x-handlebars" data-template-name="application">
     <header>
-        <h1>Car Buddy</h1>
+        {{outlet header}}
     </header>
 
     <div id="wrapper">
         <div id="main-content">
-            <div id="pages">
-                <div id="message-center" class="current">
-                    <script type="text/x-handlebars">
-                        Hello <b>{{App.username}}</b>
-                        {{#each App.inboxController}}
-                        <h3>{{message_subject}}</h3>
-                        <p>{{message}}</p>
-                        {{/each}}
-                    </script>
-                </div>
-                <div id="login">
-                    <script type="text/x-handlebars">
-                        {{view App.LoginUsername}}
-                    </script>
-                    <script type="text/x-handlebars">
-                        {{view App.LoginPassword}}
-                    </script>
-                </div>
-                <div id="parking">
-                    This is the Parking Page
-                </div>
-                <div id="fuel-tracker">
-                    This is the Fuel Tracker Page
-                </div>
-            </div>
+                {{outlet content}}
         </div>
     </div>
     <footer>
-        <ul id="tab-bar">
-            <li>
-                <a href="/messages" class="current">Messages</a>
-            </li>
-            <li>
-                <a href="/parking">Parking</a>
-            </li>
-            <li>
-                <a href="/fueltracker">Fuel Tracker</a>
-            </li>
-        </ul>
+        {{outlet navBar}}
     </footer>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="http://cloud.github.com/downloads/emberjs/ember.js/ember-0.9.6.min.js"></script><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="http://cloud.github.com/downloads/emberjs/ember.js/ember-0.9.6.min.js"></script>
+    </script>
+
+    <script src="js/libs/jquery-1.9.1.js"></script>
+    <script src="js/libs/handlebars-1.0.0-rc.3.js"></script>
+    <script src="js/libs/ember-1.0.0-rc.2.js"></script>
     <script type="text/javascript" src="js/libs/iscroll-lite.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+
+    <script type="text/x-handlebars" data-template-name="header">
+        <h1>Car Buddy</h1>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="navBar">
+    <ul id="tab-bar">
+        <li>{{#linkTo "messages.inbound"}}Inbox{{/linkTo}}</li>
+        <li>{{#linkTo "messages.outbound"}}Sentbox{{/linkTo}}</li>
+        <li>{{#linkTo "parking"}}Parking{{/linkTo}}</li>
+        <li>{{#linkTo "fuel"}}Fuel Tracker{{/linkTo}}</li>
+    </ul>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="index">
+        This is the homepage
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="login">
+        {{view App.LoginUsername}}
+        {{view App.LoginPassword}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="messages">
+        This is the messages homepage
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="messages.inbound">
+        Hello <b>{{App.username}}</b>
+        {{#each App.inboundController}}
+        <h4>{{message_subject}}</h4>
+        <p>{{message}}</p>
+        {{/each}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="messages.outbound">
+        Hello <b>{{App.username}}</b>
+        {{#each App.outboundController}}
+        <h4>{{message_subject}}</h4>
+        <p>{{message}}</p>
+        {{/each}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="parking">
+        This is the parking page
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="fuel">
+        This is the fuel tracker
+    </script>
 </body>
 </html>

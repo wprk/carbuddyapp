@@ -4,28 +4,22 @@
 App = Ember.Application.create({
     LOG_TRANSITIONS: true,
     username: 'will',
-    password: '1234',
-
+    password: '1234'
 });
 
 App.Router.map(function() {
-    this.route("index", { path: '/'})
+    this.route("index", { path: '/'});
     this.route("login");
-    this.resource('messages', function() {
-        this.route('inbound');
-        this.route('outbound');
-    });
+    this.route("messages");
     this.route("parking");
     this.route("fuel", { path: '/fuel-tracker' });
 });
 
 App.IndexRoute = Ember.Route.extend({
     renderTemplate: function() {
-        this.render('header', { outlet: 'header' });
-        this.render('navBar', {
-            view: 'navBar',
-            outlet: 'navBar',
-            into: 'application'
+        this.render('header', {
+            into: 'application',
+            outlet: 'header'
         });
         this.render('index', {
             into: 'application',
@@ -36,11 +30,9 @@ App.IndexRoute = Ember.Route.extend({
 
 App.LoginRoute = Ember.Route.extend({
     renderTemplate: function() {
-        this.render('header', { outlet: 'header' });
-        this.render('navBar', {
-            view: 'navBar',
-            outlet: 'navBar',
-            into: 'application'
+        this.render('header-login', {
+            into: 'application',
+            outlet: 'header'
         });
         this.render('login', {
             into: 'application',
@@ -51,11 +43,9 @@ App.LoginRoute = Ember.Route.extend({
 
 App.MessagesRoute = Ember.Route.extend({
     renderTemplate: function() {
-        this.render('header', { outlet: 'header' });
-        this.render('navBar', {
-            view: 'navBar',
-            outlet: 'navBar',
-            into: 'application'
+        this.render('header-messages', {
+            into: 'application',
+            outlet: 'header'
         });
         this.render('messages', {
             into: 'application',
@@ -64,43 +54,11 @@ App.MessagesRoute = Ember.Route.extend({
     }
 });
 
-App.InboundRoute = Ember.Route.extend({
-    renderTemplate: function() {
-        this.render('header', { outlet: 'header' });
-        this.render('navBar', {
-            view: 'navBar',
-            outlet: 'navBar',
-            into: 'application'
-        });
-        this.render('messages.inbound', {
-            into: 'application',
-            outlet: 'content'
-        });
-    }
-});
-
-App.OutboundRoute = Ember.Route.extend({
-    renderTemplate: function() {
-        this.render('header', { outlet: 'header' });
-        this.render('navBar', {
-            view: 'navBar',
-            outlet: 'navBar',
-            into: 'application'
-        });
-        this.render('messages.outbound', {
-            into: 'application',
-            outlet: 'content'
-        });
-    }
-});
-
 App.ParkingRoute = Ember.Route.extend({
     renderTemplate: function() {
-        this.render('header', { outlet: 'header' });
-        this.render('navBar', {
-            view: 'navBar',
-            outlet: 'navBar',
-            into: 'application'
+        this.render('header-parking', {
+            into: 'application',
+            outlet: 'header'
         });
         this.render('parking', {
             into: 'application',
@@ -111,11 +69,9 @@ App.ParkingRoute = Ember.Route.extend({
 
 App.FuelRoute = Ember.Route.extend({
     renderTemplate: function() {
-        this.render('header', { outlet: 'header' });
-        this.render('navBar', {
-            view: 'navBar',
-            outlet: 'navBar',
-            into: 'application'
+        this.render('header-fuel', {
+            into: 'application',
+            outlet: 'header'
         });
         this.render('fuel', {
             into: 'application',
@@ -129,7 +85,6 @@ function scroll(){
     theScroll = new iScroll('wrapper');
 }
 document.addEventListener('DOMContentLoaded', scroll, false);
-
 
 function checkLogin() {
     alert('Logged in and Ready');

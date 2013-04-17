@@ -20,7 +20,7 @@
         </div>
     </div>
     <footer>
-        {{outlet navBar}}
+        {{render navBar}}
     </footer>
     </script>
 
@@ -31,19 +31,31 @@
     <script type="text/javascript" src="js/app.js"></script>
 
     <script type="text/x-handlebars" data-template-name="header">
-        <h1>Car Buddy</h1>
+        <h1>Home</h1>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="header-messages">
+        <h1>Messages</h1>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="header-parking">
+        <h1>Parking</h1>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="header-fuel">
+        <h1>Fuel Tracker</h1>
     </script>
 
     <script type="text/x-handlebars" data-template-name="navBar">
     <ul id="tab-bar">
-        <li>{{#linkTo "messages.inbound"}}Inbox{{/linkTo}}</li>
-        <li>{{#linkTo "messages.outbound"}}Sentbox{{/linkTo}}</li>
+        <li>{{#linkTo "messages"}}Messages{{/linkTo}}</li>
         <li>{{#linkTo "parking"}}Parking{{/linkTo}}</li>
         <li>{{#linkTo "fuel"}}Fuel Tracker{{/linkTo}}</li>
     </ul>
     </script>
 
     <script type="text/x-handlebars" data-template-name="index">
+        Hello <b>{{App.username}}</b><br />
         This is the homepage
     </script>
 
@@ -53,30 +65,20 @@
     </script>
 
     <script type="text/x-handlebars" data-template-name="messages">
-        This is the messages homepage
-    </script>
-
-    <script type="text/x-handlebars" data-template-name="messages.inbound">
-        Hello <b>{{App.username}}</b>
-        {{#each App.inboundController}}
-        <h4>{{message_subject}}</h4>
-        <p>{{message}}</p>
-        {{/each}}
-    </script>
-
-    <script type="text/x-handlebars" data-template-name="messages.outbound">
-        Hello <b>{{App.username}}</b>
-        {{#each App.outboundController}}
+        Hello <b>{{App.username}}</b><br />
+        {{#each App.messagesController}}
         <h4>{{message_subject}}</h4>
         <p>{{message}}</p>
         {{/each}}
     </script>
 
     <script type="text/x-handlebars" data-template-name="parking">
+        Hello <b>{{App.username}}</b><br />
         This is the parking page
     </script>
 
     <script type="text/x-handlebars" data-template-name="fuel">
+        Hello <b>{{App.username}}</b><br />
         This is the fuel tracker
     </script>
 </body>

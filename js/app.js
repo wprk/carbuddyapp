@@ -103,7 +103,7 @@ App.Outgoings.reopenClass({
             success: function(data){
                 return data;
                 // return JSON.parse(data)
-                alert('Its working');   //It will alert when you ajax call returns successfully.
+                // alert('Its working');   //It will alert when you ajax call returns successfully.
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(JSON.stringify(jqXHR));
@@ -111,7 +111,8 @@ App.Outgoings.reopenClass({
             }
         }).done(function(response) {
             response.forEach( function (outgoing) {
-                outgoings.push( App.Outgoings.create(outgoing) );
+                console.log(outgoing);
+                outgoings.push(App.Outgoings.create(outgoing));
             });
         });
         return outgoings;

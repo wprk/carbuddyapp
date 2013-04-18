@@ -66,9 +66,9 @@
 
     <script type="text/x-handlebars" data-template-name="messages">
         Hello <b>{{App.username}}</b><br />
-        {{#each outgoings in model}}
-        <h4>{{outgoings.vehicle_reg}}</h4>
-        <p>{{outgoings.message_subject}}</p>
+        {{#each App.Messages}}
+        <h4>{{messages.vehicle_reg}}</h4>
+        <p>{{messages.message_subject}}</p>
         {{/each}}
     </script>
 

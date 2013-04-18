@@ -24,7 +24,7 @@
     </footer>
     </script>
 
-    <script src="js/libs/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/libs/handlebars-1.0.0-rc.3.js"></script>
     <script src="js/libs/ember-1.0.0-rc.2.js"></script>
     <script type="text/javascript" src="js/libs/iscroll-lite.js"></script>
@@ -66,9 +66,9 @@
 
     <script type="text/x-handlebars" data-template-name="messages">
         Hello <b>{{App.username}}</b><br />
-        {{#each App.messagesController}}
-        <h4>{{message_subject}}</h4>
-        <p>{{message}}</p>
+        {{#each outgoings in model}}
+        <h4>{{outgoings.vehicle_reg}}</h4>
+        <p>{{outgoings.message_subject}}</p>
         {{/each}}
     </script>
 

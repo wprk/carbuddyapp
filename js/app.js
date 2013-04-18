@@ -42,6 +42,9 @@ App.LoginRoute = Ember.Route.extend({
 });
 
 App.MessagesRoute = Ember.Route.extend({
+    model: function() {
+        return App.Outgoings.all();
+    },
     renderTemplate: function() {
         this.render('header-messages', {
             into: 'application',
@@ -53,6 +56,8 @@ App.MessagesRoute = Ember.Route.extend({
         });
     }
 });
+
+App.Outgoings = Ember.Object.extend();
 
 App.ParkingRoute = Ember.Route.extend({
     renderTemplate: function() {
@@ -80,29 +85,37 @@ App.FuelRoute = Ember.Route.extend({
     }
 });
 
-var theScroll;
-function scroll(){
-    theScroll = new iScroll('wrapper');
-}
-document.addEventListener('DOMContentLoaded', scroll, false);
-
-function checkLogin() {
-    alert('Logged in and Ready');
-}
-
 /**************************
  * Models
  **************************/
-App.Users = Ember.Object.extend({
-    username: null,
-    password: null
-});
-
-App.Messages = Ember.Object.extend({
-    message_subject: null,
-    message: null,
-    sent: 0,
-    read: 0
+App.Outgoings.reopenClass({
+    all: function() {
+        var outgoings = [];
+        var apiPage = "messages";
+        var parameters_string = "action=outgoing";
+        var url = "http://do-web-design.com/clients/carbuddy/index.php/api/";
+        var url = url + apiPage + "?" + parameters_string + "&username=" + "will" + "&password=" + "1234";
+        // console.log(url);
+        var response = $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "text json",
+            success: function(data){
+                return data;
+                // return JSON.parse(data)
+                alert('Its working');   //It will alert when you ajax call returns successfully.
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' | ' + errorThrown);
+            }
+        }).done(function(response) {
+            response.forEach( function (outgoing) {
+                outgoings.push( App.Outgoings.create(outgoing) );
+            });
+        });
+        return outgoings;
+    }
 });
 
 /**************************
@@ -119,3 +132,16 @@ App.LoginPassword = Ember.TextField.extend({
 /**************************
  * Controllers
  **************************/
+
+/**************************
+ * Functions
+ **************************/
+var theScroll;
+function scroll(){
+    theScroll = new iScroll('wrapper');
+}
+document.addEventListener('DOMContentLoaded', scroll, false);
+
+function checkLogin() {
+    alert('Logged in and Ready');
+}
